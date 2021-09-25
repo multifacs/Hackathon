@@ -8,34 +8,30 @@ import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
 import java.util.*
+import kotlin.random.Random
 
 @Component
 class MockDataLoader @Autowired constructor(
         val touristRepository: TouristRepository
 ): ApplicationRunner {
     override fun run(args: ApplicationArguments?) {
-        val tourists = listOf(
-                Tourist( // correct location
-                        UUID.randomUUID().toString(),
-                        Detector(
-                                UUID.randomUUID().toString(),
-                                110.0,
-                                35.0
-                        ),
-                        "User 1",
-                        1
-                ),
-                Tourist( // incorrect location
-                        UUID.randomUUID().toString(),
-                        Detector(
-                                UUID.randomUUID().toString(),
-                                180.0,
-                                68.0
-                        ),
-                        "User 2",
-                        1
-                )
-        )
+        val tourists = ArrayList<Tourist>()
+
+        for(i in 1..10) {
+            tourists.add(
+                    Tourist(
+                            UUID.randomUUID().toString(),
+                            Detector(
+                                    UUID.randomUUID().toString(),
+                                    Random.nextDouble(0.0, 1000.0),
+                                    Random.nextDouble(0.0, 1000.0)
+                            ),
+                            "User $i",
+                            Random.nextInt(0, 10)
+                    )
+            )
+        }
+
         touristRepository.saveAll(tourists)
     }
 }
