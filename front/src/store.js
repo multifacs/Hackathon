@@ -8,24 +8,6 @@ import axios from "axios";
 const state = {
   sidebarShow: 'responsive',
   sidebarMinimize: false,
-<<<<<<< Updated upstream
-  dots: [
-    {
-      id: 1,
-      x: 560,
-      y: 300
-    },
-    {
-      id: 2,
-      x: 400,
-      y: 100
-    },
-    {
-      id: 3,
-      x: 780,
-      y: 500
-    },
-  ],
   warnings: [
     {
       touristName: "Иванов Иван Иванович",
@@ -41,10 +23,24 @@ const state = {
       message: "Мне хуева!",
       touristId: "string"
     }
-  ]
-=======
+  ],
   dots: [],
->>>>>>> Stashed changes
+  users: [
+    {
+      id: 'b13878e4-77da-4287-9c91-fcf4c9ead5a7',
+      name: 'Yiorgos Avraamu',
+      battery: 93,
+      avatar: "img/avatars/1.jpg",
+      login: "16:05:12",
+    },
+    {
+      id: '1ebb20b2-69a9-4db0-b97b-e2449e2193fc',
+      name: 'Avram Tarasios',
+      battery: 91,
+      avatar: "img/avatars/2.jpg",
+      login: "18:37:23",
+    }
+  ]
 }
 
 const mutations = {
@@ -75,8 +71,5 @@ const actions = {
 export default new Vuex.Store({
   state,
   mutations,
-<<<<<<< Updated upstream
-=======
   actions
->>>>>>> Stashed changes
 })

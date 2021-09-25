@@ -2,10 +2,6 @@
   <div class="c-app">
     <TheSidebar />
     <CWrapper>
-<<<<<<< Updated upstream
-=======
-      <TheHeader />
->>>>>>> Stashed changes
       <div class="c-body">
         <main class="c-main">
           <CContainer fluid>
@@ -15,16 +11,11 @@
           </CContainer>
         </main>
       </div>
-<<<<<<< Updated upstream
-=======
-      <TheFooter />
->>>>>>> Stashed changes
     </CWrapper>
   </div>
 </template>
 
 <script>
-<<<<<<< Updated upstream
   import TheSidebar from './TheSidebar'
 
   export default {
@@ -33,21 +24,6 @@
       TheSidebar,
     },
   }
-=======
-import TheSidebar from "./TheSidebar";
-import TheHeader from "./TheHeader";
-import TheFooter from "./TheFooter";
-
-
-export default {
-  name: "TheContainer",
-  components: {
-    TheSidebar,
-    TheHeader,
-    TheFooter,
-  },
-};
->>>>>>> Stashed changes
 </script>
 
 <style scoped>

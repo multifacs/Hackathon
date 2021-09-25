@@ -7,34 +7,13 @@
         </h4>
       </CCol>
     </CRow>
-    <!-- <CRow class="w-50 justify-content-md-center">
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 1</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move2">Scenario 2</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 3</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 4</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 5</CButton>
-      </CCol>
-    </CRow> -->
 
     <div class="my-1">
-      <!-- <div
-        class="skier"
-        :class="{ active: isActive }"
-        :style="{ transform: 'translate(' + x + 'px, ' + y + 'px)' }"
-      ></div> -->
       <div
         v-for="dot in dots"
         :key="dot.id"
         class="skier"
+        :class="{active: dots.indexOf(dot)==$route.query.id}"
         :style="{
           transform:
             'translate(' + dot.latitude + 'px, ' + dot.longitude + 'px)',
@@ -55,10 +34,9 @@ export default {
   data() {
     return {
       selected: "Month",
-      mapURL: "img/map/map.png",
+      mapURL: "img/map/map2.png",
       x: 560,
       y: 300,
-      isActive: false,
       dots: null,
       timer: "",
     };
@@ -82,6 +60,7 @@ export default {
         })
         .then(() => {
           this.dots = this.$store.state.dots;
+          console.log(this.dots.indexOf(this.dots[0]));
         });
     },
     cancelAutoUpdate() {
@@ -108,7 +87,7 @@ export default {
 }
 
 .active {
-  animation: move1 10s ease-in-out;
+  outline: dashed red;
 }
 
 .map {

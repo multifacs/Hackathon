@@ -26,6 +26,7 @@
                                         variant="ghost"
                                         color="warning"
                                         size="lg"
+                                        @click="jump(i)"
                                     >
                                         Посмотреть на карте
                                     </CButton>
@@ -42,7 +43,12 @@
 <script>
     import { cilWarning } from '@coreui/icons'
     export default {
-        icons: { cilWarning }
+        icons: { cilWarning },
+        methods: {
+            jump(i) {
+                this.$router.replace({path: 'dashboard', query: { 'id': i}})
+            }
+        }
     }
 </script>
 
