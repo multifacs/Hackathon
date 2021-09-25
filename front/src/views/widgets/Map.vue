@@ -13,6 +13,7 @@
         v-for="dot in $store.state.dots"
         :key="dot.id"
         class="skier"
+        :class="{active: $store.state.dots.indexOf(dot)==$route.query.id}"
         :style="{
           transform:
             'translate(' + dot.latitude + 'px, ' + dot.longitude + 'px)',
@@ -28,7 +29,7 @@ export default {
   name: "Map",
   data() {
     return {
-      mapURL: "img/map/map.png",
+      mapURL: "img/map/map2.png",
     };
   },
 };
@@ -46,7 +47,7 @@ export default {
 }
 
 .active {
-  animation: move1 10s ease-in-out;
+  outline: dashed red;
 }
 
 .map {

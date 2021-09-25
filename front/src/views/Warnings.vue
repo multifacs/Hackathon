@@ -26,6 +26,7 @@
                                         variant="ghost"
                                         color="warning"
                                         size="lg"
+                                        @click="jump(i)"
                                     >
                                         Посмотреть на карте
                                     </CButton>
@@ -48,12 +49,11 @@
 
 <script>
     export default {
-        data() {
-            return {
-                warnings: []
+        methods: {
+            jump(i) {
+                this.$router.replace({path: 'dashboard', query: { 'id': i}})
             }
-        },
-        
+        }
     }
 </script>
 
