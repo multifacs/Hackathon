@@ -7,30 +7,8 @@
         </h4>
       </CCol>
     </CRow>
-    <!-- <CRow class="w-50 justify-content-md-center">
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 1</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move2">Scenario 2</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 3</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 4</CButton>
-      </CCol>
-      <CCol>
-        <CButton color="primary" v-on:click="move1">Scenario 5</CButton>
-      </CCol>
-    </CRow> -->
 
     <div class="my-1">
-      <!-- <div
-        class="skier"
-        :class="{ active: isActive }"
-        :style="{ transform: 'translate(' + x + 'px, ' + y + 'px)' }"
-      ></div> -->
       <div
         v-for="dot in $store.state.dots"
         :key="dot.id"
@@ -46,33 +24,12 @@
 </template>
 
 <script>
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
 export default {
   name: "Map",
   data() {
     return {
-      selected: "Month",
       mapURL: "img/map/map.png",
-      x: 560,
-      y: 300,
-      isActive: false,
-      dots: null,
-      timer: "",
     };
-  },
-  methods: {
-    move1() {
-      this.x = 560;
-      this.y = 300;
-      this.isActive = !this.isActive;
-    },
-    move2() {
-      this.x = getRandomInt(1000);
-      this.y = getRandomInt(500);
-    },
   },
 };
 </script>
