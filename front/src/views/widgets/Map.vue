@@ -3,7 +3,7 @@
     <CRow>
       <CCol>
         <h4>
-          Эссо
+          Станция Эссо
         </h4>
       </CCol>
     </CRow>
@@ -13,12 +13,28 @@
         v-for="dot in $store.state.dots"
         :key="dot.id"
         class="skier"
+        @mouseover="doShow[$store.state.dots.indexOf(dot)] = true"
+        @mouseleave="removeShow($store.state.dots.indexOf(dot))"
         :class="{active: $store.state.dots.indexOf(dot)==$route.query.id}"
         :style="{
           transform:
             'translate(' + dot.latitude + 'px, ' + dot.longitude + 'px)',
         }"
       ></div>
+      <CCallout color="info"
+        v-for="dot in $store.state.dots"
+        :key="dot.id+1"
+        class="info"
+        v-show="doShow[$store.state.dots.indexOf(dot)]"
+        :style="{
+          transform:
+            'translate(' + (parseInt(dot.latitude, 10) + 20).toString(10) + 'px, ' + dot.longitude + 'px)',
+        }"
+      >
+        <small class="text-muted">{{dot.id}}</small><br>
+        <strong class="h4">{{+dot.latitude.toFixed(6)}}</strong><br>
+        <strong class="h4">{{+dot.longitude.toFixed(6)}}</strong>
+      </CCallout>
       <img :src="mapURL" alt="map" class="map"/>
     </div>
   </div>
@@ -29,9 +45,17 @@ export default {
   name: "Map",
   data() {
     return {
-      mapURL: "img/map/map2.png",
+      mapURL: "img/map/map22.png",
+      doShow: [false, false],
     };
   },
+  methods: {
+    removeShow(id) {
+      setTimeout(() => {
+        this.doShow[id] = false;
+      }, 2500);
+    }
+  }
 };
 </script>
 
@@ -42,8 +66,21 @@ export default {
   background-color: red;
   border-radius: 50%;
   position: absolute;
-  transition: all 1s ease-out;
+  transition: transform 0s ease-out;
   transform: translate(560px, 300px);
+}
+
+.info {
+  position: absolute;
+  background-color: #fff;
+}
+
+.show {
+  visibility: hidden;
+}
+
+.skier:hover {
+  outline: dashed red;
 }
 
 .active {
