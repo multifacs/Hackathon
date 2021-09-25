@@ -21,6 +21,22 @@ const state = {
       x: 780,
       y: 500
     },
+  ],
+  warnings: [
+    {
+      touristName: "Иванов Иван Иванович",
+      latitude: 0,
+      longitude: 0,
+      message: "Мне хуева!",
+      touristId: "string"
+    },
+    {
+      touristName: "Иванов Иван Иванович",
+      latitude: 0,
+      longitude: 0,
+      message: "Мне хуева!",
+      touristId: "string"
+    }
   ]
 }
 
@@ -35,10 +51,10 @@ const mutations = {
   },
   set (state, [variable, value]) {
     state[variable] = value
-  }
+  },
 }
 
 export default new Vuex.Store({
   state,
-  mutations
+  mutations,
 })
