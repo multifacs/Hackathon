@@ -13,20 +13,10 @@ export default [
         }
       },
       {
-        _name: 'CSidebarNavTitle',
-        _children: ['Theme']
-      },
-      {
         _name: 'CSidebarNavItem',
-        name: 'Colors',
-        to: '/theme/colors',
+        name: 'Предупреждения',
+        to: '/warnings',
         icon: 'cil-drop'
-      },
-      {
-        _name: 'CSidebarNavItem',
-        name: 'Typography',
-        to: '/theme/typography',
-        icon: 'cil-pencil'
       },
     ]
   }

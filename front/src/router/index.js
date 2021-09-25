@@ -6,6 +6,7 @@ const TheContainer = () => import('@/containers/TheContainer')
 
 // Views
 const Dashboard = () => import('@/views/Dashboard')
+const Warnings = () => import('@/views/Warnings')
 
 const Colors = () => import('@/views/theme/Colors')
 const Typography = () => import('@/views/theme/Typography')
@@ -80,24 +81,9 @@ function configRoutes () {
           component: Dashboard
         },
         {
-          path: 'theme',
-          redirect: '/theme/colors',
-          name: 'Theme',
-          component: {
-            render (c) { return c('router-view') }
-          },
-          children: [
-            {
-              path: 'colors',
-              name: 'Colors',
-              component: Colors
-            },
-            {
-              path: 'typography',
-              name: 'Typography',
-              component: Typography
-            }
-          ]
+          path: 'warnings',
+          name: 'Warnings',
+          component: Warnings
         },
         {
           path: 'charts',
