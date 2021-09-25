@@ -1,6 +1,6 @@
 <template>
   <div class="c-app">
-    <TheSidebar/>
+    <TheSidebar />
     <CWrapper>
       <div class="c-body">
         <main class="c-main">
