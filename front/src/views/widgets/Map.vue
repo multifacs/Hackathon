@@ -32,7 +32,7 @@
         :style="{ transform: 'translate(' + x + 'px, ' + y + 'px)' }"
       ></div> -->
       <div
-        v-for="dot in dots"
+        v-for="dot in $store.state.dots"
         :key="dot.id"
         class="skier"
         :style="{
@@ -73,25 +73,6 @@ export default {
       this.x = getRandomInt(1000);
       this.y = getRandomInt(500);
     },
-
-    fetchDots() {
-      this.$store
-        .dispatch("fetchDots")
-        .then(() => {
-          console.log("This would be printed after dispatch!!");
-        })
-        .then(() => {
-          this.dots = this.$store.state.dots;
-        });
-    },
-    cancelAutoUpdate() {
-      clearInterval(this.timer);
-    },
-  },
-
-  created() {
-    this.fetchDots();
-    this.timer = setInterval(this.fetchDots, 3000);
   },
 };
 </script>

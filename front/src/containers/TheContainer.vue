@@ -23,6 +23,26 @@
     components: {
       TheSidebar,
     },
+    methods: {
+        fetchWarns() {
+            this.$store
+              .dispatch("fetchWarns");
+            },
+        fetchDots() {
+          this.$store
+            .dispatch("fetchDots")
+        },
+        cancelAutoUpdate() {
+            clearInterval(this.dotsTimer);
+            clearInterval(this.warnsTimer);
+        }
+    },
+    created() {
+        this.fetchWarns();
+        this.fetchDots();
+        this.dotsTimer = setInterval(this.fetchDots, 3000);
+        this.warnsTimer = setInterval(this.fetchWarns, 3000);
+    },
   }
 </script>
 

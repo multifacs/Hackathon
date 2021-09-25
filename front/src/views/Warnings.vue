@@ -1,6 +1,6 @@
 <template>
     <div>
-        <CCard class="card no-border no-background">
+        <CCard class="card no-border no-background" v-if="$store.state.warnings.length">
             <CCardHeader class="no-border no-background card-header">
                 <span class="text header">
                     Данные объекты находятся в зоне повышенной опасности
@@ -19,7 +19,7 @@
                                     <CIcon src="warn.png" size="lg"/>
                                 </CCol>
                                 <CCol md="6">
-                                    <span class="text">{{ warn.message }}</span>
+                                    <span class="text message">{{ warn.message }}</span>
                                 </CCol>
                                 <CCol md="4">
                                     <CButton
@@ -36,13 +36,24 @@
                 </CListGroup>
             </CCardBody>
         </CCard>
+        <CCard class="card no-border no-background" v-else>
+            <CCardHeader class="no-border no-background card-header">
+                <span class="text header">
+                    Предупреждений нет
+                </span>
+            </CCardHeader>
+        </CCard>
     </div>
 </template>
 
 <script>
-    import { cilWarning } from '@coreui/icons'
     export default {
-        icons: { cilWarning }
+        data() {
+            return {
+                warnings: []
+            }
+        },
+        
     }
 </script>
 
@@ -76,5 +87,8 @@
 }
 .no-background {
     background: none;
+}
+.message {
+    font-size: 20px;
 }
 </style>
