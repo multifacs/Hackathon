@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 Vue.use(Vuex)
+
+import axios from "axios";
 
 const state = {
   sidebarShow: 'responsive',
   sidebarMinimize: false,
+<<<<<<< Updated upstream
   dots: [
     {
       id: 1,
@@ -38,6 +42,9 @@ const state = {
       touristId: "string"
     }
   ]
+=======
+  dots: [],
+>>>>>>> Stashed changes
 }
 
 const mutations = {
@@ -54,7 +61,22 @@ const mutations = {
   },
 }
 
+const actions = {
+  fetchDots({ commit }) {  
+    axios
+    .get("http://localhost:8081/api/tourists/points")
+    .then((response) => (commit('set', ['dots', response.data])))
+    .catch((error) => {
+      console.log(error.statusText)
+    });
+  }
+}
+
 export default new Vuex.Store({
   state,
   mutations,
+<<<<<<< Updated upstream
+=======
+  actions
+>>>>>>> Stashed changes
 })
