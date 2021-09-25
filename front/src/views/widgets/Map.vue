@@ -2,12 +2,12 @@
   <div>
     <CRow>
       <CCol>
-        <h1>
+        <h4>
           Эссо
-        </h1>
+        </h4>
       </CCol>
     </CRow>
-    <CRow class="w-50 justify-content-md-center">
+    <!-- <CRow class="w-50 justify-content-md-center">
       <CCol>
         <CButton color="primary" v-on:click="move1">Scenario 1</CButton>
       </CCol>
@@ -15,24 +15,32 @@
         <CButton color="primary" v-on:click="move2">Scenario 2</CButton>
       </CCol>
       <CCol>
-        <CButton color="primary" v-on:click="move">Scenario 3</CButton>
+        <CButton color="primary" v-on:click="move1">Scenario 3</CButton>
       </CCol>
       <CCol>
-        <CButton color="primary" v-on:click="move">Scenario 4</CButton>
+        <CButton color="primary" v-on:click="move1">Scenario 4</CButton>
       </CCol>
       <CCol>
-        <CButton color="primary" v-on:click="move">Scenario 5</CButton>
+        <CButton color="primary" v-on:click="move1">Scenario 5</CButton>
       </CCol>
-    </CRow>
+    </CRow> -->
 
-    <div class="my-3">
+    <div class="my-1">
       <!-- <div
         class="skier"
         :class="{ active: isActive }"
         :style="{ transform: 'translate(' + x + 'px, ' + y + 'px)' }"
       ></div> -->
-      <div v-for="dot in dots" :key="dot.id" class="skier"></div>
-      <img :src="mapURL" alt="map" />
+      <div
+        v-for="dot in dots"
+        :key="dot.id"
+        class="skier"
+        :style="{
+          transform:
+            'translate(' + dot.latitude + 'px, ' + dot.longitude + 'px)',
+        }"
+      ></div>
+      <img :src="mapURL" alt="map" class="map"/>
     </div>
   </div>
 </template>
@@ -51,7 +59,8 @@ export default {
       x: 560,
       y: 300,
       isActive: false,
-      dots: this.$store.state.dots,
+      dots: null,
+      timer: "",
     };
   },
   methods: {
@@ -64,6 +73,25 @@ export default {
       this.x = getRandomInt(1000);
       this.y = getRandomInt(500);
     },
+
+    fetchDots() {
+      this.$store
+        .dispatch("fetchDots")
+        .then(() => {
+          console.log("This would be printed after dispatch!!");
+        })
+        .then(() => {
+          this.dots = this.$store.state.dots;
+        });
+    },
+    cancelAutoUpdate() {
+      clearInterval(this.timer);
+    },
+  },
+
+  created() {
+    this.fetchDots();
+    this.timer = setInterval(this.fetchDots, 3000);
   },
 };
 </script>
@@ -81,6 +109,10 @@ export default {
 
 .active {
   animation: move1 10s ease-in-out;
+}
+
+.map {
+  width: 70em;
 }
 
 @keyframes move1 {
