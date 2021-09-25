@@ -4,7 +4,7 @@ export default [
     _children: [
       {
         _name: 'CSidebarNavItem',
-        name: 'Dashboard',
+        name: 'Карта',
         to: '/dashboard',
         icon: 'cil-speedometer',
         badge: {

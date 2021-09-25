@@ -40,8 +40,8 @@
     created() {
         this.fetchWarns();
         this.fetchDots();
-        this.dotsTimer = setInterval(this.fetchDots, 3000);
-        this.warnsTimer = setInterval(this.fetchWarns, 3000);
+        this.dotsTimer = setInterval(this.fetchDots, 500);
+        this.warnsTimer = setInterval(this.fetchWarns, 500);
     },
   }
 </script>
