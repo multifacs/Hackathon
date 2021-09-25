@@ -11,6 +11,7 @@ import org.mapstruct.Mappings
 interface WarningMapper {
 
     @Mappings(
+            Mapping(source = "tourist.fullName", target = "touristName"),
             Mapping(source = "tourist.id", target = "touristId"),
             Mapping(source = "tourist.detector.latitude", target = "latitude"),
             Mapping(source = "tourist.detector.longitude", target = "longitude")

@@ -16,6 +16,7 @@ class TouristDetails(
 )
 
 class WarningMessage(
+        val touristName: String,
         val touristId: String,
         val latitude: Double,
         val longitude: Double,
