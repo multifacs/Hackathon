@@ -29,8 +29,8 @@ class TouristService @Autowired constructor(
     @Scheduled(fixedDelay = 1000)
     fun moveTourists() {
         repository.findAll().forEach { tourist ->
-            tourist.detector.latitude = tourist.detector.latitude + Random.nextDouble(-2.0, 2.0)
-            tourist.detector.longitude = tourist.detector.longitude + Random.nextDouble(-2.0, 2.0)
+            tourist.detector.latitude = maxOf(tourist.detector.latitude + Random.nextDouble(-2.0, 2.0), 1000.0)
+            tourist.detector.longitude = maxOf(tourist.detector.longitude + Random.nextDouble(-2.0, 2.0), 1000.0)
 
             repository.save(tourist)
         }

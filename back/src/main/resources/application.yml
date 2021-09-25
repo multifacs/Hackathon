@@ -1,9 +1,9 @@
 warns:
   square:
     minLatitude: 100
-    maxLatitude: 150
-    minLongitude: 20
-    maxLongitude: 50
+    maxLatitude: 800
+    minLongitude: 100
+    maxLongitude: 500
 
 spring:
   h2:
