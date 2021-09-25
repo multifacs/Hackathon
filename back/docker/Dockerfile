@@ -1,14 +1,20 @@
-FROM gradle:7.2.0-jdk11 as build
+FROM gradle:7.2.0-jdk11 AS TEMP_BUILD_IMAGE
+ENV APP_HOME=/usr/app/
+WORKDIR $APP_HOME
+COPY build.gradle.kts settings.gradle.kts $APP_HOME
 
-COPY ./ /build
-WORKDIR /build
+COPY gradle $APP_HOME/gradle
 
-RUN gradle --no-daemon build
+COPY . .
+RUN gradle clean build -x test
 
-FROM openjdk:11-jre as app
+# actual container
+FROM adoptopenjdk/openjdk11:alpine-jre
+ENV ARTIFACT_NAME=mountainresort-0.0.1-SNAPSHOT.jar
+ENV APP_HOME=/usr/app/
 
-COPY --from=build /build/build/libs/*.jar /app/backend.jar
+WORKDIR $APP_HOME
+COPY --from=TEMP_BUILD_IMAGE $APP_HOME/build/libs/$ARTIFACT_NAME .
 
-WORKDIR /app
 EXPOSE 8080
-ENTRYPOINT java -jar ./backend.jar
+ENTRYPOINT exec java -jar ${ARTIFACT_NAME}
