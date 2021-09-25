@@ -4,7 +4,24 @@ Vue.use(Vuex)
 
 const state = {
   sidebarShow: 'responsive',
-  sidebarMinimize: false
+  sidebarMinimize: false,
+  dots: [
+    {
+      id: 1,
+      x: 560,
+      y: 300
+    },
+    {
+      id: 2,
+      x: 400,
+      y: 100
+    },
+    {
+      id: 3,
+      x: 780,
+      y: 500
+    },
+  ]
 }
 
 const mutations = {
