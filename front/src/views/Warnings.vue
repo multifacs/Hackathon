@@ -8,7 +8,7 @@
             </CCardHeader>
             <CCardBody class="card-body no-border">
                 <CListGroup>
-                    <CListGroupItem v-for="(warn, i) in $store.state.warnings" v-bind:key="i" 
+                    <CListGroupItem v-for="(warn, i) in $store.state.warnings.slice(2,4)" v-bind:key="i" 
                       class="container no-border">
                         <CContainer>
                             <CRow alignHorizontal="center">
@@ -69,10 +69,10 @@
 }
 .tourist-name {
     line-height: 90px;
-    font-size: 60px;
+    font-size: 40px;
 }
 .container {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .header {
     color: #000000;

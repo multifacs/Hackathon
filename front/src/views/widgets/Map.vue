@@ -8,34 +8,81 @@
       </CCol>
     </CRow>
 
-    <div class="my-1">
+    <CModal title="Запрос состояния" color="warning" :show.sync="warningModal">
+      Запрос отправлен
+    </CModal>
+
+    <CModal title="Помощь" color="danger" :show.sync="dangerModal">
+      Запрос отправлен
+    </CModal>
+
+    <CModal title="Предупреждения" color="warning" :show.sync="primaryModal">
+      Новые предупреждения
+    </CModal>
+
+    <div
+      class="buttons"
+      v-show="showButtons"
+      :style="{
+        transform:
+          'translate(' +
+          (parseInt($store.state.user.latitude, 10) + 20).toString(10) +
+          'px, ' +
+          (parseInt($store.state.user.longitude, 10) - 30).toString(10) +
+          'px)',
+      }"
+    >
+      <CButton @click="warningModal = true" color="warning" style="margin-right: 5px">
+        Запрос состояния
+      </CButton>
+      <CButton @click="dangerModal = true" color="danger">
+        Послать помощь
+      </CButton>
+    </div>
+    <CCallout
+      color="info"
+      class="info"
+      v-show="doShow"
+      :style="{
+        transform:
+          'translate(' +
+          (parseInt($store.state.user.latitude, 10) + 20).toString(10) +
+          'px, ' +
+          $store.state.user.longitude +
+          'px)',
+      }"
+    >
+      <small class="text-muted">{{ $store.state.user.id }}</small
+      ><br />
+      <strong class="h5">{{ $store.state.user.fullName }}</strong
+      ><br />
+      <strong class="h5">Level: {{ $store.state.user.level }}</strong
+      ><br />
+      <strong class="h6">{{ +$store.state.user.latitude.toFixed(6) }}</strong
+      ><br />
+      <strong class="h6">{{ +$store.state.user.longitude.toFixed(6) }}</strong>
+    </CCallout>
+
+    <div class="map-container">
       <div
         v-for="dot in $store.state.dots"
         :key="dot.id"
         class="skier"
-        @mouseover="doShow[$store.state.dots.indexOf(dot)] = true"
-        @mouseleave="removeShow($store.state.dots.indexOf(dot))"
-        :class="{active: $store.state.dots.indexOf(dot)==$route.query.id}"
+        @click="showCall($store.state.dots.indexOf(dot))"
+        @mouseover="
+          updateUser(dot.id);
+          doShow = true;
+          showButtons = false;
+        "
+        @mouseleave="doShow = false"
+        :class="{ active: $store.state.dots.indexOf(dot) == $route.query.id }"
         :style="{
           transform:
             'translate(' + dot.latitude + 'px, ' + dot.longitude + 'px)',
         }"
       ></div>
-      <CCallout color="info"
-        v-for="dot in $store.state.dots"
-        :key="dot.id+1"
-        class="info"
-        v-show="doShow[$store.state.dots.indexOf(dot)]"
-        :style="{
-          transform:
-            'translate(' + (parseInt(dot.latitude, 10) + 20).toString(10) + 'px, ' + dot.longitude + 'px)',
-        }"
-      >
-        <small class="text-muted">{{dot.id}}</small><br>
-        <strong class="h4">{{+dot.latitude.toFixed(6)}}</strong><br>
-        <strong class="h4">{{+dot.longitude.toFixed(6)}}</strong>
-      </CCallout>
-      <img :src="mapURL" alt="map" class="map"/>
+
+      <img :src="mapURL" alt="map" class="map" />
     </div>
   </div>
 </template>
@@ -45,21 +92,45 @@ export default {
   name: "Map",
   data() {
     return {
-      mapURL: "img/map/map22.png",
-      doShow: [false, false],
+      mapURL: "img/map/123.drawio.png",
+      doShow: false,
+      showButtons: false,
+      id: 0,
     };
   },
+  // created() {
+  //   setTimeout(() => {
+  //     this.primaryModal = true;
+  //   }, 10000);
+  // },
   methods: {
     removeShow(id) {
       setTimeout(() => {
         this.doShow[id] = false;
       }, 2500);
-    }
-  }
+    },
+    updateUser(id) {
+      this.id = id;
+      this.$store.dispatch("fetchUser", id);
+      console.log("mouse over", this.id);
+    },
+    showCall() {
+      console.log("123");
+      this.showButtons = true;
+      setTimeout(() => {
+        this.showButtons = false;
+      }, 5000);
+    },
+  },
 };
 </script>
 
 <style scoped>
+.map-container {
+  position: relative;
+  width: 840px;
+  overflow: hidden;
+}
 .skier {
   width: 10px;
   height: 10px;
@@ -71,6 +142,7 @@ export default {
 }
 
 .info {
+  z-index: 90;
   position: absolute;
   background-color: #fff;
 }
@@ -88,7 +160,12 @@ export default {
 }
 
 .map {
-  width: 70em;
+  width: 60em;
+}
+
+.buttons {
+  position: absolute;
+  z-index: 90;
 }
 
 @keyframes move1 {
