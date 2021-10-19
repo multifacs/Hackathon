@@ -1,66 +1,43 @@
 <template>
-  <div class="c-app flex-row align-items-center">
-    <CContainer>
-      <CRow class="justify-content-center">
-        <CCol md="8">
-          <CCardGroup>
-            <CCard class="p-4">
-              <CCardBody>
-                <CForm>
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
-                  <CInput
-                    placeholder="Username"
-                    autocomplete="username email"
-                  >
-                    <template #prepend-content><CIcon name="cil-user"/></template>
-                  </CInput>
-                  <CInput
-                    placeholder="Password"
-                    type="password"
-                    autocomplete="curent-password"
-                  >
-                    <template #prepend-content><CIcon name="cil-lock-locked"/></template>
-                  </CInput>
-                  <CRow>
-                    <CCol col="6" class="text-left">
-                      <CButton color="primary" class="px-4">Login</CButton>
-                    </CCol>
-                    <CCol col="6" class="text-right">
-                      <CButton color="link" class="px-0">Forgot password?</CButton>
-                      <CButton color="link" class="d-lg-none">Register now!</CButton>
-                    </CCol>
-                  </CRow>
-                </CForm>
-              </CCardBody>
-            </CCard>
-            <CCard
-              color="primary"
-              text-color="white"
-              class="text-center py-5 d-md-down-none"
-              body-wrapper
-            >
-              <CCardBody>
-                <h2>Sign up</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <CButton
-                  color="light"
-                  variant="outline"
-                  size="lg"
-                >
-                  Register Now!
-                </CButton>
-              </CCardBody>
-            </CCard>
-          </CCardGroup>
-        </CCol>
-      </CRow>
-    </CContainer>
-  </div>
+  <Layout>
+    <Header class="header"><h2 class="title">Ищейка</h2></Header>
+    <Content>
+      <a-space class="form-box" direction="vertical" align="center" size="middle">
+        <div><h2>Вход в личный аккаунт</h2></div>
+        <div><a-input placeholder="Введите свое имя" /></div>
+        <div><a-input placeholder="Введите свой адрес электронной почты" /></div>
+        <a-button type="primary" v-on:click="logIn">Вход</a-button>
+      </a-space>
+    </Content>
+  </Layout>
 </template>
 
 <script>
 export default {
-  name: 'Login'
+  methods: {
+    logIn() {
+      this.$store.state.logged = true
+      this.$router.push('/dashboard')
+    }
+  }
 }
 </script>
+
+<style scoped>
+  .title {
+    color: #fff;
+  }
+  .header {
+    background-color: #142A4A;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10%;
+    text-align: end;
+    align-items: baseline;
+    margin-top: 5%;
+  }
+  .form-box {
+    margin-top: 10%;
+    margin-left: 50%;
+  }
+</style>

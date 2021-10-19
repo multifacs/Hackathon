@@ -27,7 +27,7 @@ function configRoutes () {
   return [
     {
       path: '/',
-      redirect: '/dashboard',
+      redirect: '/login',
       name: 'Home',
       component: TheContainer,
       children: [
@@ -40,6 +40,11 @@ function configRoutes () {
           path: 'warnings',
           name: 'Warnings',
           component: Warnings
+        },
+        {
+          path: 'login',
+          name: 'Login',
+          component: Login
         }
       ]
     },  
@@ -60,11 +65,6 @@ function configRoutes () {
           path: '500',
           name: 'Page500',
           component: Page500
-        },
-        {
-          path: 'login',
-          name: 'Login',
-          component: Login
         },
         {
           path: 'register',

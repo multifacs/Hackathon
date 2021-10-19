@@ -8,6 +8,7 @@ import axios from "axios";
 const state = {
   sidebarShow: 'responsive',
   warnings: [],
+  logged: false,
   dots: [],
   user: {
     "id": "123",
@@ -28,6 +29,12 @@ const mutations = {
   },
   updateUser(state, user) {
     state.user = user;
+  },
+  loggedIn(state) {
+    state.logged = true
+  },
+  loggedOut(state) {
+    state.logged = false
   }
 }
 
